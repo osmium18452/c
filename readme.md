@@ -1,6 +1,6 @@
 # C语言课后习题
 
-## [第一章](./chapters/chapter 1.md)
+## [第一章](chapters/chapter1.md)
 
 ## [第二章](./chapters/chapter 2.md)
 
