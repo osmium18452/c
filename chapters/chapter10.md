@@ -156,7 +156,7 @@ node *load(char *name) {
     while (~fscanf(f, "%d", &a)) {
         node *p = (node *) malloc(sizeof(node));
         p->val = a;
-        p->next = head;
+        p->next = head; 
         head = p;
     }
     fclose(f);
@@ -186,3 +186,189 @@ int main() {
 }
 
 ```
+
+### [7.](../programs/chapter10/10.7.c)
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+    FILE *f1 = fopen("../in1.txt", "r");
+    FILE *f2 = fopen("../in2.txt", "r");
+    char a[100];
+    char b[100];
+    printf("             in1.txt | in2.txt\n");
+    printf("---------------------+---------------------\n");
+    while (true) {
+        bool flaga = false, flagb = false;
+        if (~fscanf(f1, "%[^\n]%*c", a)) {
+            flaga = true;
+        }
+        if (~fscanf(f2, "%[^\n]%*c", b)) {
+            flagb = true;
+        }
+        if (flaga && flagb) {
+            printf("%20s |", a);
+            printf(" %-20s\n", b);
+        } else if (!flagb && !flaga) {
+            break;
+        } else {
+            if (flaga) {
+                printf("%20s |\n", a);
+                while (~fscanf(f1, "%[^\n]%*c", a)) {
+                    printf("%20s |\n", a);
+                }
+                break;
+            } else if (flagb) {
+                printf("                     | %-20s\n", b);
+                while (~fscanf(f2, "%[^\n]%*c", b)) {
+                    printf("                     | %-20s\n", b);
+                }
+                break;
+            }
+        }
+    }
+}
+
+```
+
+### [8.](../programs/chapter10/10.8.c)
+
+```c
+#include <stdio.h>
+
+int main() {
+    FILE *f = fopen("in.txt", "rb");
+    char c;
+    int columncnt = 0;
+    printf("+------------------------------------\n| ");
+    while (true) {
+        c = fgetc(f);
+        if (c == EOF) {
+            break;
+        } else {
+            if (columncnt % 4 == 0 && columncnt != 0 && columncnt % 16 != 0) printf(" ");
+            if (columncnt % 16 == 0 && columncnt != 0) printf("\n| ");
+            printf("%02X", c);
+            columncnt++;
+        }
+    }
+    return 0;
+}
+```
+
+### [9.](../programs/chapter10/10.9.c)
+
+
+```c
+#include <stdio.h>
+
+int main() {
+    int a, b, c;
+    char name[30], stdnum[30];
+    FILE *f = fopen("out.txt", "w");
+    for (int i = 0; i < 30; i++) {
+        scanf("%s%s%d%d%d", stdnum, name, &a, &b, &c);
+        fprintf(f, "%s %s %d %d %d\n", stdnum, name, a, b, c);
+    }
+    return 0;
+}
+```
+
+### [10.](../programs/chapter10/10.10.c)
+
+### [11.](../programs/chapter10/10.11.c)
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    FILE *f = fopen("in.c", "r");
+    char s[100];
+    int cnt = 0;
+    while (~fscanf(f, "%s", s)) {
+        if (strcmp(s, "int") == 0) cnt++;
+        if (strcmp(s, "auto") == 0) cnt++;
+        if (strcmp(s, "break") == 0) cnt++;
+        if (strcmp(s, "case") == 0) cnt++;
+        if (strcmp(s, "char") == 0) cnt++;
+        if (strcmp(s, "const") == 0) cnt++;
+        if (strcmp(s, "continue") == 0) cnt++;
+        if (strcmp(s, "default") == 0) cnt++;
+        if (strcmp(s, "do") == 0) cnt++;
+        if (strcmp(s, "double") == 0) cnt++;
+        if (strcmp(s, "else") == 0) cnt++;
+        if (strcmp(s, "enum") == 0) cnt++;
+        if (strcmp(s, "extern") == 0) cnt++;
+        if (strcmp(s, "float") == 0) cnt++;
+        if (strcmp(s, "for") == 0) cnt++;
+        if (strcmp(s, "goto") == 0) cnt++;
+        if (strcmp(s, "if") == 0) cnt++;
+        if (strcmp(s, "long") == 0) cnt++;
+        if (strcmp(s, "register") == 0) cnt++;
+        if (strcmp(s, "return") == 0) cnt++;
+        if (strcmp(s, "short") == 0) cnt++;
+        if (strcmp(s, "signed") == 0) cnt++;
+        if (strcmp(s, "sizeof") == 0) cnt++;
+        if (strcmp(s, "static") == 0) cnt++;
+        if (strcmp(s, "struct") == 0) cnt++;
+        if (strcmp(s, "switch") == 0) cnt++;
+        if (strcmp(s, "typedef") == 0) cnt++;
+        if (strcmp(s, "unsigned") == 0) cnt++;
+        if (strcmp(s, "union") == 0) cnt++;
+        if (strcmp(s, "void") == 0) cnt++;
+        if (strcmp(s, "volatile") == 0) cnt++;
+        if (strcmp(s, "while") == 0) cnt++;
+    }
+    printf("%d", cnt);
+    return 0;
+}
+
+```
+
+### [12.](../programs/chapter10/10.12.c)
+
+```c
+
+```
+
+### [13.](../programs/chapter10/10.13.c)
+
+```c
+
+```
+
+### [14.](../programs/chapter10/10.14.c)
+
+```c
+
+```
+
+### [15.](../programs/chapter10/10.15.c)
+
+```c
+
+```
+
+### [16.](../programs/chapter10/10.16.c)
+
+```c
+
+```
+
+### [17.](../programs/chapter10/10.17.c)
+
+```c
+
+```
+
+### [18.](../programs/chapter10/10.18.c)
+
+```c
+
+```
+
+
