@@ -1,8 +1,7 @@
 ### [1.](../programs/chapter11/11.1.c)
 
-```c
-
-```
+程序段1: 2 <br>
+程序段2: 3 $\times$ n
 
 ### [2.](../programs/chapter11/11.2.c)
 
