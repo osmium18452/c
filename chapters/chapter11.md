@@ -538,12 +538,80 @@ int main() {
 ### [17.](../programs/chapter11/11.17.c)
 
 ```c
+#include <stdio.h>
 
+int queue[100000];
+
+int main() {
+    int n, m;
+    scanf("%d%d", &n, &m);
+    unsigned int head = 0, tail = 0;
+    queue[tail++] = n;
+    while (true) {
+        int now = queue[head++];
+        if (now == m) {
+            int cnt = 0;
+            printf("%d=", m);
+            while ((head & 0x80000000) == 0) head *= 2;
+            head *= 2;
+            while (head != 0) {
+                if ((head & 0x80000000) == 0) printf("f(");
+                else printf("g(");
+                cnt++;
+                head *= 2;
+            }
+            printf("%d", n);
+            while (cnt > 0) {
+                printf(")");
+                cnt--;
+            }
+            break;
+        } else {
+            queue[tail++] = now * 3;
+            queue[tail++] = now / 2;
+        }
+    }
+    return 0;
+}
 ```
 
 ### [18.](../programs/chapter11/11.18.c)
 
 ```c
+#include <stdio.h>
+
+int n, k, a[20], b[20], min = 1000000000;
+
+void s(int x) {
+    if (x == n) {
+        int Max = b[0];
+        for (int i = 1; i <= k; i++)
+            if (b[i] > Max)
+                Max = b[i];
+        if (Max < min)
+            min = Max;
+        return;
+    }
+    for (int i = 0; i < k; i++) {
+        if (b[i] + a[x] > min)
+            continue;
+        b[i] += a[x];
+        s(x + 1);
+        b[i] -= a[x];
+    }
+}
+
+int main() {
+    int i;
+    scanf("%d%d", &n, &k);
+    for (i = 0; i < n; i++)
+        scanf("%d", a + i);
+    for (i = 0; i < k; i++)
+        b[i] = 0;
+    s(0);
+    printf("%d", min);
+    return 0;
+}
 
 ```
 
