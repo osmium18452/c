@@ -59,13 +59,124 @@ int main() {
 ### [2.](../programs/chapter12/12.2.c)
 
 ```c
+#include <stdio.h>
+#include <stdlib.h>
 
+struct node {
+    int val;
+    node *next;
+};
+
+int main() {
+    int n;
+    scanf("%d", &n);
+    node *head = NULL;
+    while (n--) {
+        node *p = (node *) malloc(sizeof(node));
+        scanf("%d", &(p->val));
+        p->next = head;
+        head = p;
+    }
+    int x, y;
+    scanf("%d%d", &x, &y);
+    node *p = head;
+    node *prev = NULL;
+    while (p != NULL) {
+        if (p->val >= x && p->val <= y) {
+            if (p == head) {
+                p = p->next;
+                free(head);
+                head = p;
+            } else if (p->next == NULL) {
+                prev->next = NULL;
+                free(p);
+                break;
+            } else {
+                prev->next = p->next;
+                free(p);
+                p = prev->next;
+            }
+        } else {
+            prev = p;
+            p = p->next;
+        }
+    }
+
+    p = head;
+    while (p != NULL) {
+        printf("%d ", p->val);
+        p = p->next;
+    }
+    return 0;
+}
 ```
 
 ### [3.](../programs/chapter12/12.3.c)
 
 ```c
+#include <stdio.h>
+#include <stdlib.h>
 
+struct node {
+int val;
+node *next;
+};
+
+void del(node *head, int n) {
+node *p = head, *q = NULL;
+while (p != NULL) {
+if (p->val == n) {
+if (p->next==NULL&&p==head) break;
+if (p->next == NULL) {
+if (q!=NULL) q->next = NULL;
+free(p);
+break;
+} else if (p == head) {
+q = p;
+p = p->next;
+} else {
+q->next = p->next;
+free(p);
+p = q->next;
+}
+} else {
+q = p;
+p = p->next;
+}
+}
+}
+
+int main() {
+int n;
+scanf("%d", &n);
+node *head = NULL;
+while (n--) {
+node *p = (node *) malloc(sizeof(node));
+scanf("%d", &(p->val));
+p->next = head;
+head = p;
+}
+node *p = head, *q;
+head = NULL;
+while (p != NULL) {
+q = p->next;
+p->next = head;
+head = p;
+p = q;
+}
+p = head;
+while (p != NULL) {
+del(p, p->val);
+p = p->next;
+}
+
+p = head;
+while (p != NULL) {
+printf("%d ", p->val);
+p = p->next;
+}
+return 0;
+}
 ```
 
 ### [4.](../programs/chapter12/12.4.c)
